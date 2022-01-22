@@ -14,4 +14,4 @@ jobs:
         configuration: [Test, Debug, Profile, Release]
     runs-on: windows-latest
     steps:
-      - run: powershell ./Tools/Windows/Powershell/Package_Windows_${{ matrix.arch }}.ps1 -Config ${{ matrix.configuration }}
+      - run: powershell -File ./Tools/Windows/Powershell/Package_Windows_${{ matrix.arch }}.ps1 -Config ${{ matrix.configuration }}
