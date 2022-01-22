@@ -1,0 +1,17 @@
+name: CMake
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  package-windows:
+    strategy:
+      matrix:
+        arch: [x86, x64]
+        configuration: [Test, Debug, Profile, Release]
+    runs-on: windows-latest
+    steps:
+      - run: ./Tools/Windows/Powershell/Package_Windows_${{ matrix.arch }}.sh -Config ${{ matrix.configuration }}
