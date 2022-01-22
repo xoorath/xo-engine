@@ -1,0 +1,39 @@
+project ("xo-engine")
+
+set(PROJ_PUBLIC_DIR      Include/  )
+set(PROJ_PRIVATE_DIR     Source/ )
+
+file(GLOB_RECURSE PROJ_SOURCE_FILES 
+    "${PROJ_PRIVATE_DIR}/*.cpp"
+    "${PROJ_PRIVATE_DIR}/*.h"
+    "${PROJ_PUBLIC_DIR}/*.cpp"
+    "${PROJ_PUBLIC_DIR}/*.h"
+)
+file(GLOB_RECURSE PROJ_INCLUDE_FILES 
+    "${PROJ_PRIVATE_DIR}/*.h"
+)
+
+add_library(${PROJECT_NAME} SHARED ${PROJ_SOURCE_FILES})
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE 
+    XOENGINE_EXPORTS 
+    CONFIG_TEST=100
+    CONFIG_DEBUG=200
+    CONFIG_PROFILE=300
+    CONFIG_RELEASE=400
+    $<$<CONFIG:Test>:CONFIG=CONFIG_TEST PROFILE_ENABLED _DEBUG>
+    $<$<CONFIG:Debug>:CONFIG=CONFIG_DEBUG;PROFILE_ENABLED;_DEBUG>
+    $<$<CONFIG:Profile>:CONFIG=CONFIG_PROFILE;PROFILE_ENABLED;_OPTIMIZED>
+    $<$<CONFIG:Release>:CONFIG=CONFIG_RELEASE;_OPTIMIZED>
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${PROJ_PUBLIC_DIR})
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJ_PRIVATE_DIR})
+
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES
+    PUBLIC_HEADER "${PROJ_INCLUDE_FILES}"
+)
+
+target_link_libraries(${PROJECT_NAME} xo-math $<$<CONFIG:Test>:Catch2>)
+

@@ -1,0 +1,23 @@
+project (xo-demo)
+
+set(PROJ_PRIVATE_DIR     Source/ )
+
+file(GLOB_RECURSE PROJ_SOURCE_FILES 
+    "${PROJ_PRIVATE_DIR}/*.cpp"
+    "${PROJ_PRIVATE_DIR}/*.h"
+)
+
+add_executable(${PROJECT_NAME} ${PROJ_SOURCE_FILES})
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE 
+    CONFIG_TEST=100
+    CONFIG_DEBUG=200
+    CONFIG_PROFILE=300
+    CONFIG_RELEASE=400
+    $<$<CONFIG:Test>:CONFIG=CONFIG_TEST PROFILE_ENABLED _DEBUG>
+    $<$<CONFIG:Debug>:CONFIG=CONFIG_DEBUG;PROFILE_ENABLED;_DEBUG>
+    $<$<CONFIG:Profile>:CONFIG=CONFIG_PROFILE;PROFILE_ENABLED;_OPTIMIZED>
+    $<$<CONFIG:Release>:CONFIG=CONFIG_RELEASE;_OPTIMIZED>
+)
+
+target_link_libraries(${PROJECT_NAME} xo-math xo-engine stb_image $<$<CONFIG:Test>:Catch2>)
