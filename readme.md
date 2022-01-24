@@ -1,6 +1,6 @@
 # xo-engine
 
-[![CMake](https://github.com/xoorath/xo-engine/actions/workflows/package.yml/badge.svg?branch=main)](https://github.com/xoorath/xo-engine/actions/workflows/package.yml)
+[![Build and Package](https://github.com/xoorath/xo-engine/actions/workflows/package.yml/badge.svg)](https://github.com/xoorath/xo-engine/actions/workflows/package.yml)
 
 An engine project for the purpose of integrating components such as xo-math. 
 
