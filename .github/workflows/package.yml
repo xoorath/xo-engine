@@ -22,3 +22,7 @@ jobs:
       - name: Run Package_Windows_${{ matrix.arch }}.ps1 -${{ matrix.configuration }}
         run: ./Tools/Windows/Powershell/Package_Windows_${{ matrix.arch }}.ps1 -Config ${{ matrix.configuration }}
         shell: pwsh
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Windows ${{ matrix.arch }} ${{ matrix.configuration }}
+          path: Package/Windows_${{ matrix.arch }}/*.zip
