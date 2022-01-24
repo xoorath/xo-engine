@@ -1,6 +1,8 @@
-# xo-cmake-boilerplate
+# xo-engine
 
-A cmake project setup for quickly creating C++ projects using cmake.
+[![CMake](https://github.com/xoorath/xo-engine/actions/workflows/package.yml/badge.svg?branch=main)](https://github.com/xoorath/xo-engine/actions/workflows/package.yml)
+
+An engine project for the purpose of integrating components such as xo-math. 
 
 ---
 
