@@ -14,11 +14,11 @@ jobs:
       matrix:
         arch: [x86, x64]
         configuration: [Test, Debug, Profile, Release]
-    runs-on: windows-latest
+    runs-on: Windows-2019
     steps:
       - uses: actions/checkout@v1
         with:
           submodules: true
       - name: Run Package_Windows_${{ matrix.arch }}.ps1 -${{ matrix.configuration }}
         run: ./Tools/Windows/Powershell/Package_Windows_${{ matrix.arch }}.ps1 -Config ${{ matrix.configuration }}
-        shell: powershell
+        shell: pwsh
