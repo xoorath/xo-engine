@@ -24,4 +24,5 @@ jobs:
         shell: pwsh
       - uses: actions/upload-artifact@v2
         with:
-          path: Package/Windows_${{ matrix.arch }}/*.zip
+          name: Windows ${{ matrix.arch }} ${{ matrix.configuration }}
+          path: Package/Windows_${{ matrix.arch }}/*/**
