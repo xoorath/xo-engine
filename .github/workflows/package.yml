@@ -19,7 +19,7 @@ jobs:
       - name: Export Environment Variables
         run: |
           $short_sha=("${{ github.sha }}").substring(0, 7)
-          Add-Content -Path $env:GITHUB_ENV (("GITHUB_SHORT_SHA=$short_sha")
+          Add-Content -Path $env:GITHUB_ENV -Value "GITHUB_SHORT_SHA=$short_sha"
         shell: pwsh
         
       - uses: actions/checkout@v1
