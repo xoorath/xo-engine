@@ -25,7 +25,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: xo-engine ${GITHUB_SHA::6} Win ${{ matrix.arch }} ${{ matrix.configuration }}
+          name: xo-engine ${{GITHUB_SHA::6}} Win ${{ matrix.arch }} ${{ matrix.configuration }}
           path: |
             Package/Windows_${{ matrix.arch }}/**
             !Package/Windows_${{ matrix.arch }}/*.zip
