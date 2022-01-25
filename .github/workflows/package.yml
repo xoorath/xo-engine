@@ -18,7 +18,8 @@ jobs:
     steps:
       - name: Export Environment Variables
         run: |
-          Add-Content "$GITHUB_ENV" (("${{ github.sha }}").substring(0, 7))
+          $short_sha=("${{ github.sha }}").substring(0, 7)
+          Add-Content -Path $env:GITHUB_ENV (("GITHUB_SHORT_SHA=$short_sha")
         shell: pwsh
         
       - uses: actions/checkout@v1
@@ -31,7 +32,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: xo-engine ${github_short_sha} Win ${{ matrix.arch }} ${{ matrix.configuration }}
+          name: xo-engine ${GITHUB_SHORT_SHA} Win ${{ matrix.arch }} ${{ matrix.configuration }}
           path: |
             Package/Windows_${{ matrix.arch }}/**
             !Package/Windows_${{ matrix.arch }}/*.zip
