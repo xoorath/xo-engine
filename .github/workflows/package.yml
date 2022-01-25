@@ -25,4 +25,8 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Windows ${{ matrix.arch }} ${{ matrix.configuration }}
-          path: Package/Windows_${{ matrix.arch }}/*/**
+          path: |
+            Package/Windows_${{ matrix.arch }}/**
+            !Package/Windows_${{ matrix.arch }}/*.zip
+          if-no-files-found: error
+          retention-days: 7
